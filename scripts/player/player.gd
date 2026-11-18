@@ -60,6 +60,8 @@ var _attack_hit: Array[Node] = []
 @onready var _attack_area: Area2D = $AttackHitbox
 @onready var _attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
 @onready var _hurtbox: Area2D = $Hurtbox
+@onready var _sprite: AnimatedSprite2D = $Sprite
+@onready var _slash: Sprite2D = $AttackHitbox/Slash
 
 
 func _ready() -> void:
@@ -67,6 +69,10 @@ func _ready() -> void:
 	hp = max_hp
 	_light_budget = stats.light_gain_cap_per_s
 	_attack_shape.disabled = true
+	_slash.visible = false
+	var lantern := LightUtil.make_light(100.0, Color(1.0, 0.8, 0.45), 0.85)
+	lantern.position = Vector2(0, -16)
+	add_child(lantern)
 	EventBus.light_changed.emit(light, stats.light_max)
 
 
@@ -82,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if state != State.DEAD:
 		_check_contact_damage()
-	queue_redraw()
+	_update_visuals()
 
 
 # ---------------------------------------------------------------- estados
@@ -286,21 +292,33 @@ func _tick_timers(delta: float) -> void:
 	_light_budget = minf(_light_budget + stats.light_gain_cap_per_s * delta, stats.light_gain_cap_per_s)
 
 
-## Arte provisional: rectángulos. Se sustituye tras la prueba de arte (decisión #5).
-func _draw() -> void:
-	var col := Color(0.95, 0.85, 0.55)
+## Elige animación y efectos según el estado. El arte sale de tools/art/gen_art.py.
+func _update_visuals() -> void:
+	_sprite.flip_h = facing < 0
+	_sprite.position.x = 1.5 * facing
+	var anim := &"idle"
 	match state:
-		State.DODGE: col = Color(0.6, 0.8, 1.0, 0.7)
-		State.HURT: col = Color(1.0, 0.4, 0.4)
-		State.HEAL: col = Color(1.0, 1.0, 0.8).lerp(Color.WHITE, _state_t / stats.heal_channel_s)
-		State.DEAD: col = Color(0.3, 0.3, 0.3)
-	if _iframes_t > 0.0 and state != State.DODGE and int(_iframes_t * 20.0) % 2 == 0:
-		col.a = 0.35
-	draw_rect(Rect2(Vector2(-BODY_SIZE.x * 0.5, -BODY_SIZE.y), BODY_SIZE), col)
-	draw_rect(Rect2(Vector2(facing * 3 - 2, -BODY_SIZE.y + 6), Vector2(4, 4)), Color.BLACK)
+		State.NORMAL:
+			if not is_on_floor():
+				anim = &"jump" if velocity.y < 0.0 else &"fall"
+			elif absf(velocity.x) > 10.0:
+				anim = &"run"
+		State.ATTACK: anim = &"attack"
+		State.DODGE: anim = &"dodge"
+		State.HURT: anim = &"hurt"
+		State.HEAL: anim = &"heal"
+		State.DEAD: anim = &"dead"
+	if _sprite.animation != anim:
+		_sprite.play(anim)
 	if state == State.ATTACK:
-		var active := not _attack_shape.disabled
-		var c := Color(1, 1, 1, 0.9) if active else Color(1, 1, 1, 0.25)
-		draw_set_transform(_attack_area.position, _attack_area.rotation)
-		draw_rect(Rect2(Vector2(-12, -9), Vector2(24, 18)), c, active)
-		draw_set_transform(Vector2.ZERO)
+		# Fotogramas ligados a las fases del golpe, no a un reloj aparte.
+		var f := 0 if _state_t < ATTACK_STARTUP_S else (1 if _state_t < ATTACK_STARTUP_S + ATTACK_ACTIVE_S else 2)
+		_sprite.frame = f
+		_slash.visible = f >= 1 and _state_t < ATTACK_STARTUP_S + ATTACK_ACTIVE_S + 0.08
+		_slash.frame = clampi(int((_state_t - ATTACK_STARTUP_S) / 0.06), 0, 2)
+	else:
+		_slash.visible = false
+	var a := 1.0
+	if _iframes_t > 0.0 and state != State.DODGE and int(_iframes_t * 20.0) % 2 == 0:
+		a = 0.35
+	_sprite.modulate = Color(1.6, 1.2, 1.2, a) if state == State.HURT else Color(1, 1, 1, a)

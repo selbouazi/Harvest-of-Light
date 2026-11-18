@@ -7,7 +7,8 @@ Señal de alarma: si el repo tiene más documentos que escenas jugables, se est�
 - [x] Repo en Git, CLAUDE.md con versión fijada, tests automáticos, CI.
 - [x] Arena de pruebas con moveset base y un enemigo.
 - [x] Resolver horas/semana (D18), arte y música (D19, D20) y Magia (D21).
-- [ ] Prueba de arte (A2): héroe, enemigo, fondo de 3 capas y una luz, generados por script. Probar Light2D en el hardware mínimo.
+- [x] Prueba de arte: héroe, enemigo, fondo de 3 capas y luces, generados por script (D22, D23).
+- [ ] Probar Light2D y el rendimiento en el hardware mínimo.
 - [ ] Especificar fotogramas del moveset (arranque/activo/recuperación) y tabla de daño.
 - [ ] Matriz de puertas y habilidades + grafo del mundo de las 3 regiones (A6).
 - [ ] Documento de la R1 (salas con ID, Sellos, NPC, objetos).

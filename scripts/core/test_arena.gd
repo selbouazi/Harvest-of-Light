@@ -11,6 +11,10 @@ const RESPAWN_DELAY_S := 1.2
 
 func _ready() -> void:
 	_player.died.connect(_on_player_died)
+	var cam: Camera2D = _player.get_node("Camera2D")
+	cam.limit_left = -192
+	cam.limit_right = 1152
+	cam.limit_bottom = 240
 	EventBus.room_entered.emit(room_id)
 
 

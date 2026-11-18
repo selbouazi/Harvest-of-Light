@@ -8,7 +8,9 @@ extends StaticBody2D
 	set(v):
 		size = v
 		_rebuild()
-@export var color := Color(0.18, 0.2, 0.28)
+@export var tiles: Texture2D = preload("res://assets/art/tiles.png")
+## Si es false, todas las celdas usan el tile de relleno (paredes).
+@export var has_surface := true
 
 var _shape: CollisionShape2D
 
@@ -30,6 +32,16 @@ func _rebuild() -> void:
 	queue_redraw()
 
 
+## Atlas de 16 px: celda 0 = superficie, celda 1 = relleno. Recorta en los bordes.
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), color)
-	draw_rect(Rect2(Vector2.ZERO, Vector2(size.x, 2)), color.lightened(0.25))
+	const T := 16.0
+	var y := 0.0
+	while y < size.y:
+		var x := 0.0
+		var h := minf(T, size.y - y)
+		while x < size.x:
+			var w := minf(T, size.x - x)
+			var cell := 0 if (y == 0.0 and has_surface) else 1
+			draw_texture_rect_region(tiles, Rect2(x, y, w, h), Rect2(cell * T, 0, w, h))
+			x += T
+		y += T

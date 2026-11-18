@@ -27,6 +27,7 @@ var _t := 0.0
 var _flash_t := 0.0
 
 @onready var _edge_ray: RayCast2D = $EdgeRay
+@onready var _sprite: AnimatedSprite2D = $Sprite
 
 
 func _ready() -> void:
@@ -65,6 +66,7 @@ func _physics_process(delta: float) -> void:
 		State.DEAD:
 			return
 	move_and_slide()
+	_update_visuals()
 	queue_redraw()
 
 
@@ -126,18 +128,27 @@ func _find_player() -> Node2D:
 	return get_tree().get_first_node_in_group(&"player") as Node2D
 
 
-func _draw() -> void:
-	var col := Color(0.45, 0.42, 0.55)
-	match state:
-		State.TELEGRAPH:
-			# Telegrafía legible: contraste fijo, independiente de la oscuridad de la sala (I9).
-			col = Color(1.0, 0.55, 0.1) if int(_t * 12.0) % 2 == 0 else Color(1.0, 0.9, 0.3)
-		State.LUNGE: col = Color(1.0, 0.25, 0.15)
-		State.RECOVER: col = Color(0.35, 0.35, 0.45)
-		State.STAGGER: col = Color(0.7, 0.7, 0.8)
+func _update_visuals() -> void:
+	_sprite.flip_h = facing < 0
+	var anim: StringName = {
+		State.PATROL: &"walk", State.TELEGRAPH: &"telegraph", State.LUNGE: &"lunge",
+		State.RECOVER: &"recover", State.STAGGER: &"stagger", State.DEAD: &"stagger",
+	}[state]
+	if _sprite.animation != anim:
+		_sprite.play(anim)
 	if _flash_t > 0.0:
-		col = Color.WHITE
-	draw_rect(Rect2(Vector2(-SIZE.x * 0.5, -SIZE.y), SIZE), col)
-	draw_rect(Rect2(Vector2(facing * 4 - 2, -SIZE.y + 5), Vector2(4, 3)), Color(0.9, 0.9, 1.0))
-	var w := SIZE.x * float(maxi(hp, 0)) / float(max_hp)
-	draw_rect(Rect2(Vector2(-SIZE.x * 0.5, -SIZE.y - 5), Vector2(w, 2)), Color(0.9, 0.2, 0.2))
+		_sprite.modulate = Color(3, 3, 3)
+	elif state == State.TELEGRAPH:
+		# Contraste fijo, independiente de la luz de la sala (D14).
+		_sprite.modulate = Color(1.5, 1.2, 0.9) if int(_t * 12.0) % 2 == 0 else Color(1, 1, 1)
+	else:
+		_sprite.modulate = Color(1, 1, 1)
+
+
+## Barra de vida (encima del sprite: el sprite tiene show_behind_parent).
+func _draw() -> void:
+	if state == State.DEAD or hp >= max_hp:
+		return
+	var w := 18.0 * float(maxi(hp, 0)) / float(max_hp)
+	draw_rect(Rect2(Vector2(-9, -34), Vector2(18, 2)), Color(0.1, 0.05, 0.08))
+	draw_rect(Rect2(Vector2(-9, -34), Vector2(w, 2)), Color(0.9, 0.25, 0.2))

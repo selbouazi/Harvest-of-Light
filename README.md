@@ -19,6 +19,13 @@ Metroidvania 2D sobre la luz que se cosecha. Proyecto en solitario con Godot 4.6
 | Curar (mantener, gasta 33 luz) | F / C | Y |
 | Guardar / cargar (debug) | F5 / F9 | — |
 
+## Arte
+Todo el arte sale de `tools/art/gen_art.py` (Python 3 + Pillow + numpy):
+```bash
+python3 tools/art/gen_art.py
+```
+Cambia parámetros del script y vuelve a ejecutarlo; no edites los PNG a mano.
+
 ## Documentación
 - [docs/decisiones.md](docs/decisiones.md) — decisiones de diseño cerradas y abiertas.
 - [docs/preproduccion.md](docs/preproduccion.md) — hitos, criterios de salida y checklist.

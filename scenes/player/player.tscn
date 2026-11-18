@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1"]
+[ext_resource type="SpriteFrames" path="res://assets/art/frames/hero.tres" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/slash.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="body"]
 size = Vector2(12, 28)
@@ -21,6 +23,12 @@ script = ExtResource("1")
 position = Vector2(0, -14)
 shape = SubResource("body")
 
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.5, -16)
+sprite_frames = ExtResource("2")
+animation = &"idle"
+autoplay = "idle"
+
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 20
@@ -39,7 +47,12 @@ monitorable = false
 shape = SubResource("attack")
 disabled = true
 
+[node name="Slash" type="Sprite2D" parent="AttackHitbox"]
+visible = false
+texture = ExtResource("3")
+hframes = 3
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -30)
+position = Vector2(0, -60)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0

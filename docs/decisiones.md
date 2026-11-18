@@ -27,13 +27,14 @@ se reabre con datos de juego (playtest u horas medidas), no con otro documento.
 | D18 | Sin horas semanales fijas: se planifica por hitos y criterios de salida, no por fechas. Se apuntan las horas reales igualmente (sirven para medir coste por pieza). | registro-horas.md |
 | D19 | Arte: pixel art de baja resolución generado por Claude con scripts reproducibles (`tools/art/`), paleta estricta. Huecos (tiles genéricos, UI) con packs CC0 (Kenney, OpenGameArt). | `tools/art/`, `assets/` |
 | D20 | Audio: SFX sintetizados por script (estilo sfxr). Música: pistas CC0/CC-BY de OpenGameArt o itch.io, con créditos en `assets/CREDITOS.md`. Sin música por capas en la v1. | `assets/audio/` |
+| D22 | Formato de arte: viewport 640×360; Errante en lienzo 28×32 (hitbox 12×28); enemigos comunes 32×32; tiles 16 px; paleta única de ~30 colores en `gen_art.py`. Contorno oscuro de 1 px en personajes. | `tools/art/gen_art.py` |
+| D23 | Luz: sin CanvasModulate. La oscuridad está en la paleta del fondo; las luces (farol del Errante, checkpoints) son PointLight2D en modo add. | `LightUtil` |
 | D21 | Magia fuera de la v1: no hay nada que escale (luz fija, sin hechizos). Vuelve con la primera arma o habilidad de Luz y escalará solo daño de Luz. Stats v1: Vida y Fuerza. | `StatsConfig` |
 
 ## Abiertas (bloquean estimaciones — resolver en preproducción)
 
 | # | Pregunta | Notas |
 |---|---|---|
-| A2 | Resolución y paleta exactas del pixel art (p. ej. héroe de 16×28 px, 16–24 colores). | Se cierra con la prueba de arte: héroe, enemigo, fondo 3 capas, una luz. |
 | A4 | ¿Esquivar cuesta luz? | Si sí, compite con curarse. Hoy: no cuesta (cooldown 0,4 s). |
 | A5 | Duración del juego. R1 = 45–75 min ⇒ 3 regiones ≈ 3–5 h, no 6–9 h. | Decidir si las regiones 2–3 son más grandes (más coste) o el juego es corto. |
 | A6 | Habilidades de exploración: con 3 regiones hacen falta 5–7 puertas, no 3. | Matriz obstáculo × habilidad × región. |
