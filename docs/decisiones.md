@@ -24,15 +24,16 @@ se reabre con datos de juego (playtest u horas medidas), no con otro documento.
 | D15 | Texto en español con claves `tr()`; inglés con el texto congelado (Beta). | — |
 | D16 | Enemigos comunes temáticos (guardias del diezmo, cosechadores, portadores vaciados, sombras). | `hollowed_bearer.gd` |
 | D17 | Slice: incrementos fijos por nivel (Vida, Fuerza). Reparto libre solo si el slice demuestra que falta. | `StatsConfig` |
+| D18 | Sin horas semanales fijas: se planifica por hitos y criterios de salida, no por fechas. Se apuntan las horas reales igualmente (sirven para medir coste por pieza). | registro-horas.md |
+| D19 | Arte: pixel art de baja resolución generado por Claude con scripts reproducibles (`tools/art/`), paleta estricta. Huecos (tiles genéricos, UI) con packs CC0 (Kenney, OpenGameArt). | `tools/art/`, `assets/` |
+| D20 | Audio: SFX sintetizados por script (estilo sfxr). Música: pistas CC0/CC-BY de OpenGameArt o itch.io, con créditos en `assets/CREDITOS.md`. Sin música por capas en la v1. | `assets/audio/` |
+| D21 | Magia fuera de la v1: no hay nada que escale (luz fija, sin hechizos). Vuelve con la primera arma o habilidad de Luz y escalará solo daño de Luz. Stats v1: Vida y Fuerza. | `StatsConfig` |
 
 ## Abiertas (bloquean estimaciones — resolver en preproducción)
 
 | # | Pregunta | Notas |
 |---|---|---|
-| A0 | **¿Horas reales por semana?** | Cambia todo el calendario. |
-| A1 | **¿Quién hace el arte y la música?** (propio / licenciado / encargado) | Bloquea la salida del Vertical Slice (exige arte final). |
-| A2 | Estilo: pixel art baja resolución vs. recortado con huesos. | Prueba de 1 semana: héroe, enemigo, fondo 3 capas, una luz. |
-| A3 | ¿Qué escala la stat Magia si la luz no depende de ella y no hay hechizos en la v1? | Opciones: daño de Luz del arma, potencia de curación, o quitarla en la v1. |
+| A2 | Resolución y paleta exactas del pixel art (p. ej. héroe de 16×28 px, 16–24 colores). | Se cierra con la prueba de arte: héroe, enemigo, fondo 3 capas, una luz. |
 | A4 | ¿Esquivar cuesta luz? | Si sí, compite con curarse. Hoy: no cuesta (cooldown 0,4 s). |
 | A5 | Duración del juego. R1 = 45–75 min ⇒ 3 regiones ≈ 3–5 h, no 6–9 h. | Decidir si las regiones 2–3 son más grandes (más coste) o el juego es corto. |
 | A6 | Habilidades de exploración: con 3 regiones hacen falta 5–7 puertas, no 3. | Matriz obstáculo × habilidad × región. |

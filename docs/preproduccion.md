@@ -6,8 +6,8 @@ Señal de alarma: si el repo tiene más documentos que escenas jugables, se est�
 ## 0 · Preproducción (4–6 semanas)
 - [x] Repo en Git, CLAUDE.md con versión fijada, tests automáticos, CI.
 - [x] Arena de pruebas con moveset base y un enemigo.
-- [ ] Resolver A0 (horas/semana) y A1 (quién hace arte y música).
-- [ ] Prueba de arte de 1 semana (A2) y prueba de Light2D en el hardware mínimo.
+- [x] Resolver horas/semana (D18), arte y música (D19, D20) y Magia (D21).
+- [ ] Prueba de arte (A2): héroe, enemigo, fondo de 3 capas y una luz, generados por script. Probar Light2D en el hardware mínimo.
 - [ ] Especificar fotogramas del moveset (arranque/activo/recuperación) y tabla de daño.
 - [ ] Matriz de puertas y habilidades + grafo del mundo de las 3 regiones (A6).
 - [ ] Documento de la R1 (salas con ID, Sellos, NPC, objetos).
