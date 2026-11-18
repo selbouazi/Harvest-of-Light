@@ -1,0 +1,46 @@
+; Engine configuration file.
+; Godot 4.6.1 — no cambiar de versión sin actualizar CLAUDE.md y la CI.
+
+config_version=5
+
+[application]
+
+config/name="Harvest of Light"
+config/description="Metroidvania de la Luz — prototipo de núcleo"
+run/main_scene="res://scenes/levels/test_arena.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+
+[autoload]
+
+InputSetup="*res://autoload/input_setup.gd"
+EventBus="*res://autoload/event_bus.gd"
+GameState="*res://autoload/game_state.gd"
+SaveManager="*res://autoload/save_manager.gd"
+Hitstop="*res://autoload/hitstop.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="player_hitbox"
+2d_physics/layer_5="enemy_hitbox"
+
+[physics]
+
+common/physics_ticks_per_second=60
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

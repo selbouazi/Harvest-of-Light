@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/hollowed_bearer.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="body"]
+size = Vector2(16, 22)
+
+[node name="HollowedBearer" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("body")
+
+[node name="EdgeRay" type="RayCast2D" parent="."]
+position = Vector2(-10, -2)
+target_position = Vector2(0, 10)
+collision_mask = 1

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GODOT_VERSION: 4.6.1
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Godot
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/godot
+          key: godot-${{ env.GODOT_VERSION }}
+
+      - name: Descargar Godot
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/godot && cd ~/godot
+          curl -sSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip && rm godot.zip
+          mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 godot
+
+      - name: Importar proyecto
+        run: ~/godot/godot --headless --path . --import
+
+      - name: Tests unitarios
+        run: ~/godot/godot --headless --path . -s res://tests/run_tests.gd
+
+      - name: Prueba de humo (arena)
+        run: ~/godot/godot --headless --path . --quit-after 2000 res://tests/smoke_arena.tscn

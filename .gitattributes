@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ogg binary
+*.wav binary
+*.mp3 binary
+*.aseprite binary
+*.psd binary
+# Cuando haya arte pesado: activar Git LFS para estos tipos (ver docs/preproduccion.md)
