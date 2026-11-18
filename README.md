@@ -20,11 +20,15 @@ Metroidvania 2D sobre la luz que se cosecha. Proyecto en solitario con Godot 4.6
 | Guardar / cargar (debug) | F5 / F9 | — |
 
 ## Arte
-Todo el arte sale de `tools/art/gen_art.py` (Python 3 + Pillow + numpy):
+Ilustración pintada generada con FLUX.2 (Cloudflare Workers AI, cupo gratis) y procesada en local:
 ```bash
-python3 tools/art/gen_art.py
+python3 tools/art/ai_gen.py --list      # qué imágenes hay y cuáles faltan
+python3 tools/art/ai_gen.py             # genera las que falten (prompts y semillas en el script)
+python3 tools/art/process_ai.py         # recorta, iguala color, escala → assets/art/hd/
 ```
-Cambia parámetros del script y vuelve a ejecutarlo; no edites los PNG a mano.
+Requiere `pip install pillow numpy requests rembg onnxruntime`. En local hace falta exportar
+`CF_API_TOKEN` (token de Workers AI) y poner el Account ID en `tools/art/cf_account.txt`.
+Las imágenes crudas (`tools/art/raw/`) no se suben a git.
 
 ## Documentación
 - [docs/decisiones.md](docs/decisiones.md) — decisiones de diseño cerradas y abiertas.

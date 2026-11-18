@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5okm85i1c8fn"
-path="res://.godot/imported/bg_sky.png-6c650922d48caf76aef548fb986ca49d.ctex"
+uid="uid://vqph48kxirct"
+path="res://.godot/imported/bg_near.png-14d924aa9ad6ac1d1cf2bbfafd668645.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/bg_sky.png"
-dest_files=["res://.godot/imported/bg_sky.png-6c650922d48caf76aef548fb986ca49d.ctex"]
+source_file="res://assets/art/hd/bg_near.png"
+dest_files=["res://.godot/imported/bg_near.png-14d924aa9ad6ac1d1cf2bbfafd668645.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

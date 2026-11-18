@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d122l8hmo7p5b"
-path="res://.godot/imported/hollowed_bearer.png-53c8501a7bdfa5dba9affa576cc9d1fb.ctex"
+uid="uid://dww6vlc05q54"
+path="res://.godot/imported/bg_mid.png-17f2a665a74d03c19812eab4bdb7bb99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/hollowed_bearer.png"
-dest_files=["res://.godot/imported/hollowed_bearer.png-53c8501a7bdfa5dba9affa576cc9d1fb.ctex"]
+source_file="res://assets/art/hd/bg_mid.png"
+dest_files=["res://.godot/imported/bg_mid.png-17f2a665a74d03c19812eab4bdb7bb99.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://calijkn8vg4gj"
-path="res://.godot/imported/slash.png-42a3dc2e1da4bd647b4e386a932e70d5.ctex"
+uid="uid://cauw3tr3myy3t"
+path="res://.godot/imported/fg_roots.png-88c29221520fe0aed1cb9a91bada44d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/slash.png"
-dest_files=["res://.godot/imported/slash.png-42a3dc2e1da4bd647b4e386a932e70d5.ctex"]
+source_file="res://assets/art/hd/fg_roots.png"
+dest_files=["res://.godot/imported/fg_roots.png-88c29221520fe0aed1cb9a91bada44d1.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

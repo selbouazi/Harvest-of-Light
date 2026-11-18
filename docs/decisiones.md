@@ -25,10 +25,10 @@ se reabre con datos de juego (playtest u horas medidas), no con otro documento.
 | D16 | Enemigos comunes temáticos (guardias del diezmo, cosechadores, portadores vaciados, sombras). | `hollowed_bearer.gd` |
 | D17 | Slice: incrementos fijos por nivel (Vida, Fuerza). Reparto libre solo si el slice demuestra que falta. | `StatsConfig` |
 | D18 | Sin horas semanales fijas: se planifica por hitos y criterios de salida, no por fechas. Se apuntan las horas reales igualmente (sirven para medir coste por pieza). | registro-horas.md |
-| D19 | Arte: pixel art de baja resolución generado por Claude con scripts reproducibles (`tools/art/`), paleta estricta. Huecos (tiles genéricos, UI) con packs CC0 (Kenney, OpenGameArt). | `tools/art/`, `assets/` |
+| D19 | Arte: ilustración pintada a mano generada con FLUX.2 (Cloudflare Workers AI, cupo gratis ~25–30 imágenes/día) + recorte con rembg, todo reproducible desde `tools/art/ai_gen.py` (prompts y semillas) y `tools/art/process_ai.py`. Personajes: poses clave con imagen de referencia para mantener la consistencia. | `tools/art/` |
 | D20 | Audio: SFX sintetizados por script (estilo sfxr). Música: pistas CC0/CC-BY de OpenGameArt o itch.io, con créditos en `assets/CREDITOS.md`. Sin música por capas en la v1. | `assets/audio/` |
-| D22 | Formato de arte: viewport 640×360; Errante en lienzo 28×32 (hitbox 12×28); enemigos comunes 32×32; tiles 16 px; paleta única de ~30 colores en `gen_art.py`. Contorno oscuro de 1 px en personajes. | `tools/art/gen_art.py` |
-| D23 | Luz: sin CanvasModulate. La oscuridad está en la paleta del fondo; las luces (farol del Errante, checkpoints) son PointLight2D en modo add. | `LightUtil` |
+| D22 | Formato de arte HD: mundo de 640×360 unidades con stretch `canvas_items`; texturas a 4× (escala 0.25), filtrado lineal con mipmaps. Errante ≈ 40 u de alto (hitbox 12×28). | `project.godot`, `process_ai.py` |
+| D23 | Luz: sin CanvasModulate. La oscuridad está en el fondo pintado (gradación nocturna); las luces son PointLight2D en modo add que solo afectan al escenario (los personajes conservan su color). Niebla, motas y viñeta para profundidad. | `LightUtil`, `test_arena.gd` |
 | D21 | Magia fuera de la v1: no hay nada que escale (luz fija, sin hechizos). Vuelve con la primera arma o habilidad de Luz y escalará solo daño de Luz. Stats v1: Vida y Fuerza. | `StatsConfig` |
 
 ## Abiertas (bloquean estimaciones — resolver en preproducción)

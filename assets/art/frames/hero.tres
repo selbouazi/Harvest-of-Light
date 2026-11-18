@@ -1,94 +1,90 @@
-[gd_resource type="SpriteFrames" load_steps=24 format=3]
+[gd_resource type="SpriteFrames" load_steps=23 format=3]
 
-[ext_resource type="Texture2D" path="res://assets/art/hero.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/hero.png" id="1"]
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1")
-region = Rect2(0, 0, 28, 32)
+region = Rect2(0, 0, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f2"]
 atlas = ExtResource("1")
-region = Rect2(28, 0, 28, 32)
+region = Rect2(320, 0, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f3"]
 atlas = ExtResource("1")
-region = Rect2(56, 0, 28, 32)
+region = Rect2(0, 208, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f4"]
 atlas = ExtResource("1")
-region = Rect2(84, 0, 28, 32)
+region = Rect2(320, 208, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f5"]
 atlas = ExtResource("1")
-region = Rect2(0, 32, 28, 32)
+region = Rect2(640, 208, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f6"]
 atlas = ExtResource("1")
-region = Rect2(28, 32, 28, 32)
+region = Rect2(960, 208, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f7"]
 atlas = ExtResource("1")
-region = Rect2(56, 32, 28, 32)
+region = Rect2(0, 416, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f8"]
 atlas = ExtResource("1")
-region = Rect2(84, 32, 28, 32)
+region = Rect2(0, 624, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f9"]
 atlas = ExtResource("1")
-region = Rect2(112, 32, 28, 32)
+region = Rect2(0, 832, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f10"]
 atlas = ExtResource("1")
-region = Rect2(140, 32, 28, 32)
+region = Rect2(320, 832, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f11"]
 atlas = ExtResource("1")
-region = Rect2(0, 64, 28, 32)
+region = Rect2(640, 832, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f12"]
 atlas = ExtResource("1")
-region = Rect2(0, 96, 28, 32)
+region = Rect2(0, 1040, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f13"]
 atlas = ExtResource("1")
-region = Rect2(28, 96, 28, 32)
+region = Rect2(320, 1040, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f14"]
 atlas = ExtResource("1")
-region = Rect2(0, 128, 28, 32)
+region = Rect2(640, 1040, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f15"]
 atlas = ExtResource("1")
-region = Rect2(28, 128, 28, 32)
+region = Rect2(0, 1248, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f16"]
 atlas = ExtResource("1")
-region = Rect2(56, 128, 28, 32)
+region = Rect2(320, 1248, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f17"]
 atlas = ExtResource("1")
-region = Rect2(0, 160, 28, 32)
+region = Rect2(640, 1248, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f18"]
 atlas = ExtResource("1")
-region = Rect2(28, 160, 28, 32)
+region = Rect2(0, 1456, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f19"]
 atlas = ExtResource("1")
-region = Rect2(0, 192, 28, 32)
+region = Rect2(0, 1664, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f20"]
 atlas = ExtResource("1")
-region = Rect2(0, 224, 28, 32)
+region = Rect2(0, 1872, 320, 208)
 
 [sub_resource type="AtlasTexture" id="f21"]
 atlas = ExtResource("1")
-region = Rect2(28, 224, 28, 32)
-
-[sub_resource type="AtlasTexture" id="f22"]
-atlas = ExtResource("1")
-region = Rect2(0, 256, 28, 32)
+region = Rect2(0, 2080, 320, 208)
 
 [resource]
 animations = [{
@@ -98,43 +94,31 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("f2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.5
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("f3")
 }, {
 "duration": 1.0,
 "texture": SubResource("f4")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 6.0
 }, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("f5")
 }, {
 "duration": 1.0,
 "texture": SubResource("f6")
-}, {
-"duration": 1.0,
-"texture": SubResource("f7")
-}, {
-"duration": 1.0,
-"texture": SubResource("f8")
-}, {
-"duration": 1.0,
-"texture": SubResource("f9")
-}, {
-"duration": 1.0,
-"texture": SubResource("f10")
 }],
 "loop": true,
 "name": &"run",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("f11")
+"texture": SubResource("f7")
 }],
 "loop": false,
 "name": &"jump",
@@ -142,24 +126,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("f12")
-}, {
-"duration": 1.0,
-"texture": SubResource("f13")
+"texture": SubResource("f8")
 }],
-"loop": true,
+"loop": false,
 "name": &"fall",
-"speed": 8.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("f14")
+"texture": SubResource("f9")
 }, {
 "duration": 1.0,
-"texture": SubResource("f15")
+"texture": SubResource("f10")
 }, {
 "duration": 1.0,
-"texture": SubResource("f16")
+"texture": SubResource("f11")
 }],
 "loop": false,
 "name": &"attack",
@@ -167,14 +148,39 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("f17")
+"texture": SubResource("f12")
 }, {
+"duration": 1.0,
+"texture": SubResource("f13")
+}, {
+"duration": 1.0,
+"texture": SubResource("f14")
+}],
+"loop": false,
+"name": &"attack_up",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("f15")
+}, {
+"duration": 1.0,
+"texture": SubResource("f16")
+}, {
+"duration": 1.0,
+"texture": SubResource("f17")
+}],
+"loop": false,
+"name": &"attack_down",
+"speed": 0.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("f18")
 }],
 "loop": false,
 "name": &"dodge",
-"speed": 12.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -187,17 +193,14 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("f20")
-}, {
-"duration": 1.0,
-"texture": SubResource("f21")
 }],
-"loop": true,
+"loop": false,
 "name": &"heal",
-"speed": 6.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("f22")
+"texture": SubResource("f21")
 }],
 "loop": false,
 "name": &"dead",

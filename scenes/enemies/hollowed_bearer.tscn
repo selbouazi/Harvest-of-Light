@@ -21,8 +21,10 @@ target_position = Vector2(0, 10)
 collision_mask = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+light_mask = 2
 show_behind_parent = true
-position = Vector2(0, -16)
+position = Vector2(0, -25.5)
+scale = Vector2(0.25, 0.25)
 sprite_frames = ExtResource("2")
 animation = &"walk"
 autoplay = "walk"

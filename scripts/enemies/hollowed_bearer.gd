@@ -137,7 +137,7 @@ func _update_visuals() -> void:
 	if _sprite.animation != anim:
 		_sprite.play(anim)
 	if _flash_t > 0.0:
-		_sprite.modulate = Color(3, 3, 3)
+		_sprite.modulate = Color(1.8, 1.7, 1.6)
 	elif state == State.TELEGRAPH:
 		# Contraste fijo, independiente de la luz de la sala (D14).
 		_sprite.modulate = Color(1.5, 1.2, 0.9) if int(_t * 12.0) % 2 == 0 else Color(1, 1, 1)
@@ -150,5 +150,5 @@ func _draw() -> void:
 	if state == State.DEAD or hp >= max_hp:
 		return
 	var w := 18.0 * float(maxi(hp, 0)) / float(max_hp)
-	draw_rect(Rect2(Vector2(-9, -34), Vector2(18, 2)), Color(0.1, 0.05, 0.08))
-	draw_rect(Rect2(Vector2(-9, -34), Vector2(w, 2)), Color(0.9, 0.25, 0.2))
+	draw_rect(Rect2(Vector2(-9, -46), Vector2(18, 2)), Color(0.1, 0.05, 0.08))
+	draw_rect(Rect2(Vector2(-9, -46), Vector2(w, 2)), Color(0.9, 0.25, 0.2))

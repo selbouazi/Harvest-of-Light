@@ -5,7 +5,7 @@ Metroidvania 2D en solitario. Idioma del proyecto: español (código en inglés,
 ## Versión fijada
 - **Godot 4.6.1 stable, GDScript 2.0.** Nunca generar sintaxis de Godot 3
   (`onready var`, `export var`, `yield`, `KinematicBody2D`, `move_and_slide(vel)`...).
-- Renderer: GL Compatibility. Viewport 640×360, escalado entero, filtro nearest.
+- Renderer: GL Compatibility. Mundo 640×360 con stretch `canvas_items`; texturas HD a 4× (nodos con scale 0.25), filtro lineal + mipmaps.
 
 ## Comandos
 ```bash
@@ -24,6 +24,10 @@ La CI (`.github/workflows/ci.yml`) ejecuta lo mismo en cada push.
 - Contenido = Resources `.tres`. JSON = solo partidas guardadas.
 - Estado del mundo = flags por ID en `GameState.flags` (`chest/r1_03`, `seal/r1_a`, `kills/<enemy_id>`).
 - Salas con ID estable (`r1_05`) desde el primer día.
+
+## Arte
+- Pipeline en `tools/art/` (ver README). El cupo gratis de FLUX.2 da ~25–30 imágenes al día: generar solo lo necesario.
+- Personajes: añadir poses en `ASSETS` de `ai_gen.py` con `refs=["hero_ref"]` para mantener la consistencia.
 
 ## Reglas de diseño que el código debe respetar (ver docs/decisiones.md)
 - Movimiento e hitbox del jugador **constantes** (constantes en `player.gd`). Ninguna stat ni casa los cambia.

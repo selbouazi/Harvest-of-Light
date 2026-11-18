@@ -31,7 +31,10 @@ func _physics_process(_delta: float) -> void:
 			Input.action_press("move_right" if dx > 0.0 else "move_left")
 		elif signf(dx) != _player.facing:
 			Input.action_press("move_right" if dx > 0.0 else "move_left")
-		_pulse("attack", 15, 0)
+		if absf(dx) <= 32.0:
+			_pulse("attack", 15, 0)
+		else:
+			Input.action_release("attack")
 	else:
 		Input.action_press("move_right")
 	_pulse("jump", 90, 0, 12)

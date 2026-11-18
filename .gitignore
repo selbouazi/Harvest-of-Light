@@ -11,3 +11,5 @@ build/
 .DS_Store
 Thumbs.db
 .vscode/
+tools/art/raw/
+tools/art/cf_account.txt

@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1"]
 [ext_resource type="SpriteFrames" path="res://assets/art/frames/hero.tres" id="2"]
-[ext_resource type="Texture2D" path="res://assets/art/slash.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/slash.png" id="3"]
 
 [sub_resource type="RectangleShape2D" id="body"]
 size = Vector2(12, 28)
@@ -12,6 +12,9 @@ size = Vector2(10, 24)
 
 [sub_resource type="RectangleShape2D" id="attack"]
 size = Vector2(24, 18)
+
+[sub_resource type="CanvasItemMaterial" id="add"]
+blend_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -24,7 +27,9 @@ position = Vector2(0, -14)
 shape = SubResource("body")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(1.5, -16)
+light_mask = 2
+position = Vector2(0, -25.5)
+scale = Vector2(0.25, 0.25)
 sprite_frames = ExtResource("2")
 animation = &"idle"
 autoplay = "idle"
@@ -48,9 +53,11 @@ shape = SubResource("attack")
 disabled = true
 
 [node name="Slash" type="Sprite2D" parent="AttackHitbox"]
+light_mask = 2
 visible = false
+material = SubResource("add")
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("3")
-hframes = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -60)

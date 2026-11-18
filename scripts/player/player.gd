@@ -295,7 +295,6 @@ func _tick_timers(delta: float) -> void:
 ## Elige animación y efectos según el estado. El arte sale de tools/art/gen_art.py.
 func _update_visuals() -> void:
 	_sprite.flip_h = facing < 0
-	_sprite.position.x = 1.5 * facing
 	var anim := &"idle"
 	match state:
 		State.NORMAL:
@@ -303,7 +302,8 @@ func _update_visuals() -> void:
 				anim = &"jump" if velocity.y < 0.0 else &"fall"
 			elif absf(velocity.x) > 10.0:
 				anim = &"run"
-		State.ATTACK: anim = &"attack"
+		State.ATTACK:
+			anim = &"attack_up" if _attack_dir == Vector2.UP else (&"attack_down" if _attack_dir == Vector2.DOWN else &"attack")
 		State.DODGE: anim = &"dodge"
 		State.HURT: anim = &"hurt"
 		State.HEAL: anim = &"heal"
@@ -314,11 +314,14 @@ func _update_visuals() -> void:
 		# Fotogramas ligados a las fases del golpe, no a un reloj aparte.
 		var f := 0 if _state_t < ATTACK_STARTUP_S else (1 if _state_t < ATTACK_STARTUP_S + ATTACK_ACTIVE_S else 2)
 		_sprite.frame = f
-		_slash.visible = f >= 1 and _state_t < ATTACK_STARTUP_S + ATTACK_ACTIVE_S + 0.08
-		_slash.frame = clampi(int((_state_t - ATTACK_STARTUP_S) / 0.06), 0, 2)
+		var st := (_state_t - ATTACK_STARTUP_S) / (ATTACK_ACTIVE_S + 0.08)
+		_slash.visible = st >= 0.0 and st <= 1.0
+		_slash.modulate.a = 1.0 - clampf(st, 0.0, 1.0) ** 2
+		_slash.scale = Vector2.ONE * 0.25 * lerpf(0.85, 1.1, clampf(st, 0.0, 1.0))
+		_slash.flip_v = facing < 0 and _attack_dir.x == 0.0
 	else:
 		_slash.visible = false
 	var a := 1.0
 	if _iframes_t > 0.0 and state != State.DODGE and int(_iframes_t * 20.0) % 2 == 0:
 		a = 0.35
-	_sprite.modulate = Color(1.6, 1.2, 1.2, a) if state == State.HURT else Color(1, 1, 1, a)
+	_sprite.modulate = Color(1.35, 0.85, 0.85, a) if state == State.HURT else Color(1, 1, 1, a)

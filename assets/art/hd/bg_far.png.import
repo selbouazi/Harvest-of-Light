@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfw06i40ci1x4"
-path="res://.godot/imported/bg_far.png-f64935addca0b0e81c1de1816993d8b4.ctex"
+uid="uid://bu23gdptpk3fw"
+path="res://.godot/imported/bg_far.png-cfe91f4e85b511635779eb4dd9e5b5d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/bg_far.png"
-dest_files=["res://.godot/imported/bg_far.png-f64935addca0b0e81c1de1816993d8b4.ctex"]
+source_file="res://assets/art/hd/bg_far.png"
+dest_files=["res://.godot/imported/bg_far.png-cfe91f4e85b511635779eb4dd9e5b5d1.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/core/test_arena.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/core/solid_block.gd" id="2"]
@@ -6,11 +6,13 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/hollowed_bearer.tscn" id="4"]
 [ext_resource type="Script" path="res://scripts/core/hud.gd" id="5"]
 [ext_resource type="Script" path="res://scripts/core/checkpoint.gd" id="6"]
-[ext_resource type="Texture2D" path="res://assets/art/bg_sky.png" id="7"]
-[ext_resource type="Texture2D" path="res://assets/art/bg_far.png" id="8"]
-[ext_resource type="Texture2D" path="res://assets/art/bg_mid.png" id="9"]
-[ext_resource type="Texture2D" path="res://assets/art/bg_near.png" id="10"]
-[ext_resource type="Texture2D" path="res://assets/art/lantern_post.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/bg_far.png" id="7"]
+[ext_resource type="Script" path="res://scripts/core/parallax_strip.gd" id="8"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/bg_mid.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/bg_near.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/lantern.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/fog.png" id="12"]
+[ext_resource type="Texture2D" path="res://assets/art/hd/fg_roots.png" id="13"]
 
 [sub_resource type="RectangleShape2D" id="cp"]
 size = Vector2(16, 32)
@@ -18,41 +20,83 @@ size = Vector2(16, 32)
 [node name="TestArena" type="Node2D"]
 script = ExtResource("1")
 
+[node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Color" type="ColorRect" parent="Backdrop"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.04, 0.07, 0.1, 1)
+
 [node name="Background" type="Node2D" parent="."]
+z_index = -10
 
-[node name="Sky" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0, 0)
+[node name="Far" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.12, 0)
 
-[node name="Sprite" type="Sprite2D" parent="Background/Sky"]
+[node name="Sprite" type="Sprite2D" parent="Background/Far"]
+position = Vector2(-40, -50)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("7")
 centered = false
 
-[node name="Far" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.15, 0)
-repeat_size = Vector2(640, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Background/Far"]
-texture = ExtResource("8")
-centered = false
+[node name="FogFar" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.25, 0)
+autoscroll = Vector2(-4, 0)
+script = ExtResource("8")
+texture = ExtResource("12")
+texture_scale = 0.6
+base_y = 300.0
+tint = Color(1, 1, 1, 0.7)
 
 [node name="Mid" type="Parallax2D" parent="Background"]
 scroll_scale = Vector2(0.35, 0)
-repeat_size = Vector2(640, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Background/Mid"]
+script = ExtResource("8")
 texture = ExtResource("9")
-centered = false
+texture_scale = 0.2
+base_y = 290.0
+gap = 90.0
+tint = Color(0.7, 0.78, 0.9, 1)
+
+[node name="FogMid" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.5, 0)
+autoscroll = Vector2(-7, 0)
+script = ExtResource("8")
+texture = ExtResource("12")
+texture_scale = 0.55
+base_y = 312.0
+tint = Color(0.85, 0.95, 1, 0.6)
 
 [node name="Near" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.6, 0)
-repeat_size = Vector2(640, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Background/Near"]
+scroll_scale = Vector2(0.65, 0)
+script = ExtResource("8")
 texture = ExtResource("10")
-centered = false
+texture_scale = 0.14
+base_y = 288.0
+gap = 220.0
+tint = Color(0.75, 0.8, 0.9, 1)
+
+[node name="Foreground" type="Node2D" parent="."]
+z_index = 20
+
+[node name="Roots" type="Parallax2D" parent="Foreground"]
+scroll_scale = Vector2(1.35, 0)
+script = ExtResource("8")
+texture = ExtResource("13")
+texture_scale = 0.14
+base_y = -12.0
+gap = 420.0
+hang_from_top = true
+
+[node name="FogFront" type="Parallax2D" parent="Foreground"]
+scroll_scale = Vector2(1.2, 0)
+autoscroll = Vector2(-12, 0)
+script = ExtResource("8")
+texture = ExtResource("12")
+texture_scale = 0.7
+base_y = 420.0
+tint = Color(0.6, 0.7, 0.85, 0.18)
 
 [node name="Geometry" type="Node2D" parent="."]
 
@@ -98,7 +142,8 @@ collision_mask = 2
 script = ExtResource("6")
 
 [node name="Sprite" type="Sprite2D" parent="Checkpoint"]
-position = Vector2(0, -16)
+position = Vector2(0, -22)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("11")
 hframes = 2
 

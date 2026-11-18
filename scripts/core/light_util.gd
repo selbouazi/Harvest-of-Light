@@ -9,11 +9,8 @@ static func radial_texture(size: int = 256) -> GradientTexture2D:
 	if _cache.has(size):
 		return _cache[size]
 	var g := Gradient.new()
-	g.set_offset(0, 0.0)
-	g.set_color(0, Color(1, 1, 1, 1))
-	g.set_offset(1, 1.0)
-	g.set_color(1, Color(1, 1, 1, 0))
-	g.add_point(0.35, Color(1, 1, 1, 0.45))
+	g.offsets = PackedFloat32Array([0.0, 0.35, 1.0])
+	g.colors = PackedColorArray([Color(1, 1, 1, 1), Color(1, 1, 1, 0.45), Color(1, 1, 1, 0)])
 	var t := GradientTexture2D.new()
 	t.gradient = g
 	t.fill = GradientTexture2D.FILL_RADIAL
@@ -32,4 +29,7 @@ static func make_light(radius_px: float, color: Color, energy: float) -> PointLi
 	l.color = color
 	l.energy = energy
 	l.blend_mode = Light2D.BLEND_MODE_ADD
+	# Solo iluminan el escenario (capa 1). Los personajes usan light_mask = 2 y
+	# conservan su color pintado: mejor legibilidad en combate (D14).
+	l.range_item_cull_mask = 1
 	return l
